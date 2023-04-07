@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Session;
 
 class AuthManagerController extends Controller
 {
+    public function redirect()
+    {
+        $usertype = Auth::user()->usertype;
+
+        if($usertype == '1')
+        {
+            return view('admin.home');
+        }else{
+            return view('home.userpage');
+        }
+    }
+
     public function login()
     {
         return view('login');
@@ -42,7 +54,7 @@ class AuthManagerController extends Controller
 
         $credentials = $request->only('email', 'password');
         if(Auth::attempt($credentials)){
-            return redirect()->intended(route('home.userpage'));
+            return redirect()->intended(route('redirect'));
         }
         return redirect(route('login'))->with("error", "Login details are not valid");
     }
@@ -63,9 +75,9 @@ class AuthManagerController extends Controller
         $user->password = Hash::make($request->password);
         $res = $user->save();
         if($res){
-            return redirect(route('register'))->with("error", "Registration failed, try again.");
+            return redirect(route('redirect'))->with("error", "Registration failed, try again.");
         }else{
-            return redirect(route('login'))->with("success", "Registration success, Login to access the app");
+            return redirect(route('register'))->with("success", "Registration success, Login to access the app");
         }
 
         // $date['name'] = $request->name;
@@ -80,9 +92,8 @@ class AuthManagerController extends Controller
     }
 
     public function logout(){
-        if(Session::has('loginId')){
-            Session::pull('loginId');
-            return redirect('login');
-        }
+       Session::flush();
+       Auth::logout();
+       return redirect(route('login'));
     }
 }

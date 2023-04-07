@@ -16,10 +16,10 @@ use App\Http\Controllers\AuthManagerController;
 |
 */
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/redirect', [HomeController::class, 'redirect'])->middleware('isLoggedIn');
+Route::get('/redirect', [AuthManagerController::class, 'redirect'])->name('redirect');
 
-Route::get('/login', [AuthManagerController::class, 'login'])->name('login')->middleware('alreadyLoggedIn');
+Route::get('/login', [AuthManagerController::class, 'login'])->name('login');
 Route::post('/login', [AuthManagerController::class, 'loginPost'])->name('login.post');
-Route::get('/register', [AuthManagerController::class, 'register'])->name('register')->middleware('alreadyLoggedIn');
+Route::get('/register', [AuthManagerController::class, 'register'])->name('register');
 Route::post('/register', [AuthManagerController::class, 'registerPost'])->name('register.post');
 Route::get('/logout', [AuthManagerController::class, 'logout'])->name('logout');
