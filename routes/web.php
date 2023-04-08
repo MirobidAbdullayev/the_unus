@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +14,9 @@ use App\Http\Controllers\AuthManagerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/welcome', [HomeController::class, 'welcome']);
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/redirect', [AuthManagerController::class, 'redirect'])->name('redirect');
+Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect');
+Auth::routes();
 
-Route::get('/login', [AuthManagerController::class, 'login'])->name('login');
-Route::post('/login', [AuthManagerController::class, 'loginPost'])->name('login.post');
-Route::get('/register', [AuthManagerController::class, 'register'])->name('register');
-Route::post('/register', [AuthManagerController::class, 'registerPost'])->name('register.post');
-Route::get('/logout', [AuthManagerController::class, 'logout'])->name('logout');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
