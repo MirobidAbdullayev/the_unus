@@ -22,8 +22,8 @@
                                             <div class="setting ht-setting">
                                                 <ul class="ht-setting-list">
                                                     <li><a href="login-register.html">My Account</a></li>
-                                                    <li><a href="{{route('auth.register')}}">Sign Up</a></li>
-                                                    <li><a href="{{route('auth.login')}}">Sign In</a></li>                                                   
+                                                    <li><a href="{{route('register')}}">Sign Up</a></li>
+                                                    <li><a href="{{route('login')}}">Sign In</a></li>                                                   
                                                 </ul>
                                             </div>
                                         </li>

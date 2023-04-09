@@ -14,7 +14,6 @@ use App\Http\Controllers\AdminController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/welcome', [HomeController::class, 'welcome']);
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/redirect', [HomeController::class, 'redirect'])->name('redirect');
 Auth::routes();
